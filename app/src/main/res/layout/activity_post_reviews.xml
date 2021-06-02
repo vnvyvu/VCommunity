@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".view.post.PostReviews"
+            >
+            <RatingBar
+                android:id="@+id/btnRating"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="0.1"
+                android:layout_gravity="center_horizontal"
+                android:secondaryProgressTint="#00000000"
+                android:scaleY="0.8"
+                android:scaleX="0.8"
+                tools:targetApi="lollipop" />
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/btnRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="640dp"
+                android:layout_marginTop="50dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/outReviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <include android:id="@+id/bottom_sheet"
+                layout="@layout/post_info_bottom_sheet" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

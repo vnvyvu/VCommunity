@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">VCommunity</string>
+    <string name="datetimeformat">%1$td/%1$tm/%1$tY %1$tH:%1$tM:%1$tS</string>
+    <string name="nonsecondformat">%1$td/%1$tm/%1$tY %1$tH:%1$tM</string>
+    <string name="dateformat">%1$td/%1$tm/%1$tY</string>
+</resources>

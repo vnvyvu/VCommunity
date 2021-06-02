@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "897600951976",
+    "firebase_url": "https://vcommunity-99-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "vcommunity-99",
+    "storage_bucket": "vcommunity-99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897600951976:android:f80a4c5ad207f03f4fd49d",
+        "android_client_info": {
+          "package_name": "com.vyvu.vcommunity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897600951976-4nbm5u66m7lf4blpg0m94h3m1r4bo50b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vyvu.vcommunity",
+            "certificate_hash": "9ae2459591d4d4334187ef676b7f325926b95219"
+          }
+        },
+        {
+          "client_id": "897600951976-lk5hgkdenp7ph0bnktksa5c8vtnacmbf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqQ-h0RfMXtvTfQYCFwkOiH-GiqzXg2MQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897600951976-lk5hgkdenp7ph0bnktksa5c8vtnacmbf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

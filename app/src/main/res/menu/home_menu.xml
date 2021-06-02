@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/itemRecently"
+        android:title="Recently"
+        android:enabled="true"
+        tools:ignore="HardcodedText"
+        android:icon="@drawable/ic_baseline_access_time_24"
+        />
+    <item
+        android:id="@+id/itemMyTags"
+        android:title="My Tags"
+        android:enabled="true"
+        tools:ignore="HardcodedText"
+        android:icon="@drawable/ic_baseline_playlist_play_24"
+        />
+    <item
+        android:id="@+id/itemTop"
+        android:title="Top"
+        android:enabled="true"
+        tools:ignore="HardcodedText"
+        android:icon="@drawable/ic_baseline_leaderboard_24"
+        />
+    <item
+        android:id="@+id/itemTags"
+        android:title="Tags"
+        android:enabled="true"
+        tools:ignore="HardcodedText"
+        android:icon="@drawable/ic_baseline_layers_24"
+        />
+</menu>

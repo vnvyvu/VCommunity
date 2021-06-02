@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="user"
+            type="com.vyvu.vcommunity.model.User" />
+        <variable
+            name="firebaseUser"
+            type="com.google.firebase.auth.FirebaseUser" />
+    </data>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".view.home.UserInformation"
+            android:layout_gravity="center"
+            >
+            <androidx.constraintlayout.helper.widget.Flow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:flow_wrapMode="chain"
+                app:flow_verticalGap="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:constraint_referenced_ids="txtTitle,inUsername,inEmail,inPassword,inRePassword,btnSaveAuth,divider1,inName,inAvatar,inDateOfBirth,inGender,btnSaveInfo,divider2,txtExp,txtCreatedDate"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                app:icon="@drawable/ic_baseline_arrow_back_24"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:textSize="36sp"
+                android:text="Information"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="0.8"
+                android:gravity="center"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Username"
+                tools:ignore="HardcodedText"
+
+                app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
+                app:endIconMode="clear_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:layout_constraintWidth_percent="0.45"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{user.username}"
+                    android:enabled="@{user.username==``||user.username==null}"
+                    android:inputType="text"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="Email"
+                android:enabled="false"
+                tools:ignore="HardcodedText"
+                app:startIconDrawable="@drawable/ic_baseline_alternate_email_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:layout_constraintWidth_percent="0.45"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{firebaseUser.email}"
+                    android:inputType="textEmailAddress"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                tools:ignore="HardcodedText"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                app:endIconMode="password_toggle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:layout_constraintWidth_percent="0.45"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inRePassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Re-Password"
+                app:endIconMode="clear_text"
+                tools:ignore="HardcodedText"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:layout_constraintWidth_percent="0.45"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveAuth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:layout_gravity="center_horizontal"
+                tools:ignore="HardcodedText"
+                app:cornerRadius="20dp"
+                />
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                app:layout_constraintWidth_percent="0.95"
+                android:background="@android:color/darker_gray"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Your name"
+                tools:ignore="HardcodedText"
+                app:startIconDrawable="@drawable/ic_baseline_3p_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:layout_constraintWidth_percent="0.45"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{firebaseUser.displayName}"
+                    android:inputType="text"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inAvatar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Avatar"
+                tools:ignore="HardcodedText"
+                app:startIconDrawable="@drawable/ic_baseline_image_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:layout_constraintWidth_percent="0.45"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{firebaseUser.photoUrl.toString()}"
+                    android:inputType="textUri"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inDateOfBirth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Birth day"
+                tools:ignore="HardcodedText"
+                app:startIconDrawable="@drawable/ic_baseline_calendar_today_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:layout_constraintWidth_percent="0.45"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{user.dateOfBirth}"
+
+                    android:inputType="none"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/inGender"
+                android:checkedButton="@+id/radio_button_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="0.45"
+                android:orientation="vertical"
+                >
+                <RadioButton
+                    android:id="@+id/inMale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:checked="@{user.gender==1}"
+                    tools:ignore="HardcodedText" />
+                <RadioButton
+                    android:id="@+id/inFemale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:checked="@{user.gender==0}"
+                    tools:ignore="HardcodedText" />
+            </RadioGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:layout_gravity="center_horizontal"
+                tools:ignore="HardcodedText"
+                app:cornerRadius="20dp"
+                />
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                app:layout_constraintWidth_percent="0.95"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/txtExp"
+                android:text="@{`Exp: `+user.exp}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="0.45"/>
+
+            <TextView
+                android:id="@+id/txtCreatedDate"
+                android:text="@{`Created date: `+@string/datetimeformat(firebaseUser.metadata.creationTimestamp)}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="0.45"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

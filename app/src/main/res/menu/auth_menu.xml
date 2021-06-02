@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/itemLogin"
+        android:icon="@drawable/ic_baseline_login_24"
+        android:title="Login"
+        android:enabled="true"
+        tools:ignore="HardcodedText" />
+    <item android:id="@+id/itemSignUp"
+        android:icon="@drawable/ic_baseline_assignment_ind_24"
+        android:title="Sign Up"
+        android:enabled="true"
+        tools:ignore="HardcodedText" />
+    <item android:id="@+id/itemForgotPassword"
+        android:icon="@drawable/ic_baseline_assignment_late_24"
+        android:title="Forgot Password"
+        android:enabled="true"
+        tools:ignore="HardcodedText" />
+</menu>

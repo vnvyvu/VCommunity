@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="mViewModel"
+            type="com.vyvu.vcommunity.viewmodel.home.PostCreationViewModel" />
+        <variable
+            name="post"
+            type="com.vyvu.vcommunity.model.Post" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".view.home.PostCreation"
+            android:padding="10dp"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:padding="0dp"
+                app:iconPadding="0dp"
+                android:textSize="24sp"
+                app:iconGravity="textStart"
+                android:gravity="center"
+                app:icon="@drawable/ic_baseline_arrow_back_24"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/outTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.01"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                app:endIconMode="clear_text"
+                app:counterMaxLength="32"
+                app:counterEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_title_28"
+                app:layout_constraintTop_toBottomOf="@+id/outTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintWidth_percent="0.9"
+                app:layout_constraintVertical_bias="0.01"
+                tools:ignore="HardcodedText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLength="32"
+                    android:textSize="23sp"
+                    android:text="@{post.name}"
+                    android:singleLine="true"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inShortInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Short information"
+                app:endIconMode="clear_text"
+                app:counterMaxLength="48"
+                app:counterEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_subtitles_24"
+                app:layout_constraintTop_toBottomOf="@+id/inName"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintWidth_percent="0.9"
+                app:layout_constraintVertical_bias="0.01"
+                tools:ignore="HardcodedText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLength="48"
+                    android:text="@{post.shortInfo}"
+                    android:textSize="18sp"
+                    android:singleLine="true"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Image url"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_baseline_image_24"
+                app:layout_constraintTop_toBottomOf="@+id/inShortInfo"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintWidth_percent="0.9"
+                app:layout_constraintVertical_bias="0.01"
+                tools:ignore="HardcodedText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textUri"
+                    android:text="@{post.image}"
+                    android:textSize="18sp"
+                    android:singleLine="true"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Detail..."
+                app:counterEnabled="true"
+                app:counterMaxLength="2048"
+                app:endIconMode="clear_text"
+                app:layout_constraintTop_toBottomOf="@+id/inImage"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintWidth_percent="0.9"
+                app:layout_constraintVertical_bias="0.05"
+                tools:ignore="HardcodedText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:minLines="8"
+                    android:maxLength="2048"
+                    android:gravity="top|start"
+                    android:textSize="16sp"
+                    android:text="@{post.detail}"
+                    android:scrollHorizontally="true"
+                    android:scrollbars="vertical"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inTag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Tag"
+                app:errorEnabled="@{mViewModel.isTagNotFound.booleanValue()}"
+                app:startIconDrawable="@drawable/ic_baseline_layers_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+
+                app:layout_constraintTop_toBottomOf="@+id/inDetail"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintWidth_percent="0.9"
+                app:layout_constraintVertical_bias="0.01"
+                tools:ignore="HardcodedText">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="1"
+                    android:inputType="text"
+                    android:text="@{post.tag}"
+                    android:textSize="18sp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                app:layout_constraintWidth_percent="0.9"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@id/inTag"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintVertical_bias="0.05"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_gravity="center_horizontal"
+                tools:ignore="HardcodedText"
+                app:cornerRadius="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/divider1"
+                app:layout_constraintRight_toRightOf="@+id/divider1"
+                app:layout_constraintLeft_toLeftOf="@+id/divider1"
+                android:layout_marginTop="10dp"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#FF3939"
+                tools:ignore="HardcodedText"
+                android:visibility="@{post.id==null?View.GONE:View.VISIBLE}"
+                app:cornerRadius="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/divider1"
+                app:layout_constraintRight_toRightOf="@+id/divider1"
+                android:layout_marginTop="10dp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
