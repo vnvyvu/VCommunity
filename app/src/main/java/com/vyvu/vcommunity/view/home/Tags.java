@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.vyvu.vcommunity.R;
 import com.vyvu.vcommunity.databinding.TagsFragmentBinding;
-import com.vyvu.vcommunity.firebase.TagCountDAO;
+import com.vyvu.vcommunity.firebase.TagDAO;
 import com.vyvu.vcommunity.view.adapter.TagCardsAdapter;
 import com.vyvu.vcommunity.viewmodel.home.TagsViewModel;
 
@@ -45,7 +45,7 @@ public class Tags extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fragmentBinding.container.setAdapter(tagCardsAdapter=new TagCardsAdapter(getContext()));
-        tagCardsAdapter.setTags(new ArrayList<>(TagCountDAO.getTagsCount().keySet()));
+        tagCardsAdapter.setTags(new ArrayList<>(TagDAO.getTags().values()));
         fragmentBinding.container.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }

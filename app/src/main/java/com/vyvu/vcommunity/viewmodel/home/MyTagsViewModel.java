@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.vyvu.vcommunity.firebase.PostDAO;
-import com.vyvu.vcommunity.firebase.TagCountDAO;
+import com.vyvu.vcommunity.firebase.TagDAO;
 import com.vyvu.vcommunity.firebase.UserDAO;
 import com.vyvu.vcommunity.model.Post;
 
@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 
 public class MyTagsViewModel extends ViewModel {
     // TODO: Implement the ViewModel
-    private TagCountDAO tagCountDAO;
+    private TagDAO tagDAO;
     private PostDAO postDAO;
 
     public MyTagsViewModel() {
         super();
-        tagCountDAO=new TagCountDAO();
+        tagDAO =new TagDAO();
         postDAO=new PostDAO();
     }
 

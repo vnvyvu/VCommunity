@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Post implements Serializable {
-    private String id, name, shortInfo, detail, image, tag, userID;
+    private String id, name, shortInfo, detail, image, tagID, userID;
     private long view;
     private float score;
     private Date createdDate, editedDate;
@@ -88,12 +88,12 @@ public class Post implements Serializable {
         this.closed = closed;
     }
 
-    public String getTag() {
-        return tag;
+    public String getTagID() {
+        return tagID;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setTagID(String tagID) {
+        this.tagID = tagID;
     }
 
     public Date getEditedDate() {

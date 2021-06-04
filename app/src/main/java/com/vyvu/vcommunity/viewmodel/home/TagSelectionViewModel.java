@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
 import com.vyvu.vcommunity.firebase.UserDAO;
+import com.vyvu.vcommunity.model.Tag;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +25,8 @@ public class TagSelectionViewModel extends ViewModel {
         super();
         userDAO=new UserDAO();
         maxOfTags=new MutableLiveData<>();
-        maxOfTags.setValue(MAX-UserDAO.getUser().getTags().size());
+        if(UserDAO.getUser().getTagIDs()==null) maxOfTags.setValue(MAX);
+        else maxOfTags.setValue(MAX-UserDAO.getUser().getTagIDs().size());
     }
 
     public MutableLiveData<Integer> getMaxOfTags() {
@@ -32,12 +34,12 @@ public class TagSelectionViewModel extends ViewModel {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void saveUserTags(HashMap<Chip, String> chipStringHashMap, Callable<Void> callable){
-        UserDAO.getUser().setTags(new ArrayList<>(
-                chipStringHashMap.keySet()
+    public void saveUserTags(HashMap<Chip, Tag> chipTagHashMap, Callable<Void> callable){
+        UserDAO.getUser().setTagIDs(new ArrayList<>(
+                chipTagHashMap.keySet()
                         .stream()
                         .filter((chip)->chip.isChecked())
-                        .map((chip)->chipStringHashMap.get(chip))
+                        .map((chip)->chipTagHashMap.get(chip).getId())
                         .collect(Collectors.toList())
         ));
         userDAO.updateUserById(UserDAO.getUser()).addOnSuccessListener(new OnSuccessListener<Void>() {

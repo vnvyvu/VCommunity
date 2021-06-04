@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vyvu.vcommunity.R;
 import com.vyvu.vcommunity.databinding.TagsRecyclerviewBinding;
-import com.vyvu.vcommunity.firebase.TagCountDAO;
+import com.vyvu.vcommunity.model.Tag;
 import com.vyvu.vcommunity.view.home.Search;
 
 import org.jetbrains.annotations.NotNull;
@@ -21,17 +21,17 @@ import java.util.ArrayList;
 
 public class TagCardsAdapter extends RecyclerView.Adapter<TagCardsAdapter.TagCardsViewHolder> {
     private final Context context;
-    private ArrayList<String> tags;
+    private ArrayList<Tag> tags;
 
     public TagCardsAdapter(Context context) {
         this.context = context;
     }
 
-    public ArrayList<String> getTags() {
+    public ArrayList<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(ArrayList<String> tags) {
+    public void setTags(ArrayList<Tag> tags) {
         this.tags = tags;
         notifyDataSetChanged();
     }
@@ -46,10 +46,9 @@ public class TagCardsAdapter extends RecyclerView.Adapter<TagCardsAdapter.TagCar
 
     @Override
     public void onBindViewHolder(@NonNull TagCardsViewHolder holder, int position) {
-        String tag=tags.get(position);
+        Tag tag=tags.get(position);
         TagsRecyclerviewBinding binding=holder.getBinding();
         binding.setTag(tag);
-        binding.setCount(TagCountDAO.getTagsCount().get(tag));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

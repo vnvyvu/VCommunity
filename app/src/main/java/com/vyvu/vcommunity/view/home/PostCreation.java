@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
@@ -16,9 +17,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.vyvu.vcommunity.R;
 import com.vyvu.vcommunity.databinding.ActivityPostCreationBinding;
 import com.vyvu.vcommunity.firebase.PostDAO;
-import com.vyvu.vcommunity.firebase.TagCountDAO;
+import com.vyvu.vcommunity.firebase.TagDAO;
 import com.vyvu.vcommunity.firebase.UserDAO;
 import com.vyvu.vcommunity.model.Post;
+import com.vyvu.vcommunity.model.Tag;
 import com.vyvu.vcommunity.utils.ComponentUtils;
 import com.vyvu.vcommunity.viewmodel.home.PostCreationViewModel;
 
@@ -29,6 +31,7 @@ import java.util.function.Consumer;
 public class PostCreation extends AppCompatActivity {
     private ActivityPostCreationBinding postCreationBinding;
     private PostCreationViewModel mViewModel;
+    private Tag selectedTag;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -70,7 +73,7 @@ public class PostCreation extends AppCompatActivity {
                 .setAdapter(new ArrayAdapter<>(
                         this,
                         R.layout.tag_autocomplete_textview,
-                        new ArrayList<>(TagCountDAO.getTagsCount().keySet())
+                        new ArrayList<>(TagDAO.getTags().values())
                 ));
         //Catch text changed, ComponentUtils.afterCall return a TextWatcher
         //Purpose is just neat and can be reused in future
@@ -81,6 +84,14 @@ public class PostCreation extends AppCompatActivity {
                 mViewModel.validateAutoCompleteTextView(s);
             }
         }));
+
+        //Get selectedTag
+        ((AutoCompleteTextView)postCreationBinding.inTag.getEditText()).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedTag=(Tag) parent.getAdapter().getItem(position);
+            }
+        });
 
         postCreationBinding.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +107,7 @@ public class PostCreation extends AppCompatActivity {
                 //Check post received in Intent is not null, it means the author want to update it
                 if(PostDAO.getPost()!=null){
                     p=PostDAO.getPost();
+                    if(selectedTag==null) TagDAO.getTags().get(p.getTagID());
                 }else {
                     //User want to create new
                     p.setCreatedDate(new Date());
@@ -105,10 +117,10 @@ public class PostCreation extends AppCompatActivity {
                 p.setDetail(postCreationBinding.inDetail.getEditText().getText().toString());
                 p.setImage(postCreationBinding.inImage.getEditText().getText().toString());
                 p.setName(postCreationBinding.inName.getEditText().getText().toString());
-                p.setTag(postCreationBinding.inTag.getEditText().getText().toString());
+                if(selectedTag!=null) p.setTagID(selectedTag.getId());
                 p.setShortInfo(postCreationBinding.inShortInfo.getEditText().getText().toString());
                 //Validate empty fields
-                if (TextUtils.isEmpty(p.getDetail())||TextUtils.isEmpty(p.getName())||TextUtils.isEmpty(p.getTag())||TextUtils.isEmpty(p.getShortInfo())) {
+                if (TextUtils.isEmpty(p.getDetail())||TextUtils.isEmpty(p.getName())||TextUtils.isEmpty(p.getTagID())||TextUtils.isEmpty(p.getShortInfo())) {
                     mViewModel.getMessage().setValue("Don't leave any require fields blank");
                     postCreationBinding.btnSubmit.setEnabled(true);
                 }else{

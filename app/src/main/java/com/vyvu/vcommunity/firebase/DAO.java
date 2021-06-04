@@ -15,6 +15,6 @@ public class DAO {
 
     public static void signOut(){
         UserDAO.signOut();
-        TagCountDAO.signOut();
+        TagDAO.signOut();
     }
 }

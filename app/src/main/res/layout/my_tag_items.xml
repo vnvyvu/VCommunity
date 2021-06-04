@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="tag"
-            type="String" />
+            type="com.vyvu.vcommunity.model.Tag" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +22,7 @@
             android:textStyle="bold"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="@{tag}"
+            android:text="@{tag.name}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             />

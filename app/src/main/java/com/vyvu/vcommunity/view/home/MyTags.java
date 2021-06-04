@@ -18,8 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vyvu.vcommunity.R;
 import com.vyvu.vcommunity.databinding.MyTagItemsBinding;
 import com.vyvu.vcommunity.databinding.MyTagsFragmentBinding;
+import com.vyvu.vcommunity.firebase.TagDAO;
 import com.vyvu.vcommunity.firebase.UserDAO;
 import com.vyvu.vcommunity.model.Post;
+import com.vyvu.vcommunity.model.Tag;
 import com.vyvu.vcommunity.view.adapter.PostTinyCardsAdapter;
 import com.vyvu.vcommunity.viewmodel.home.MyTagsViewModel;
 
@@ -49,8 +51,10 @@ public class MyTags extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Tag myPost=new Tag();
+        myPost.setName("My posts");
         //Bind tag data to view
-        fragmentBinding.myPosts.setTag("My posts");
+        fragmentBinding.myPosts.setTag(myPost);
         //Init Recyclerview
         fragmentBinding.myPosts.container.setAdapter(new PostTinyCardsAdapter(getContext()));
         //Get all user's posts and put to recyclerview after
@@ -64,31 +68,31 @@ public class MyTags extends Fragment {
         fragmentBinding.myPosts.container.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
 
         //Init user's tags, 1 recyclerview each tag
-        ArrayList<String> tags=UserDAO.getUser().getTags();
-        switch (tags.size()){
+        ArrayList<String> tagIDs=UserDAO.getUser().getTagIDs();
+        switch (tagIDs.size()){
             case 5:
-                initItem(fragmentBinding.myTag1, tags.get(4));
+                initItem(fragmentBinding.myTag1, tagIDs.get(4));
             case 4:
-                initItem(fragmentBinding.myTag2, tags.get(3));
+                initItem(fragmentBinding.myTag2, tagIDs.get(3));
             case 3:
-                initItem(fragmentBinding.myTag3, tags.get(2));
+                initItem(fragmentBinding.myTag3, tagIDs.get(2));
             case 2:
-                initItem(fragmentBinding.myTag4, tags.get(1));
+                initItem(fragmentBinding.myTag4, tagIDs.get(1));
             case 1:
-                initItem(fragmentBinding.myTag5, tags.get(0));
+                initItem(fragmentBinding.myTag5, tagIDs.get(0));
             default:
                 break;
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void initItem(MyTagItemsBinding item, String tag){
+    private void initItem(MyTagItemsBinding item, String tagID){
         //Bind tag data to view
-        item.setTag(tag);
+        item.setTag(TagDAO.getTags().get(tagID));
         //Init Recyclerview
         item.container.setAdapter(new PostTinyCardsAdapter(getContext()));
         //Get all user's post by tag and put to recyclerview after
-        mViewModel.initMyTag(tag, new Consumer<ArrayList<Post>>() {
+        mViewModel.initMyTag(tagID, new Consumer<ArrayList<Post>>() {
             @Override
             public void accept(ArrayList<Post> posts) {
                 ((PostTinyCardsAdapter)item.container.getAdapter()).setPosts(posts);

@@ -12,7 +12,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.vyvu.vcommunity.firebase.PostDAO;
 import com.vyvu.vcommunity.firebase.ReviewDAO;
-import com.vyvu.vcommunity.firebase.TagCountDAO;
+import com.vyvu.vcommunity.firebase.TagDAO;
 import com.vyvu.vcommunity.model.Post;
 
 import java.util.function.Consumer;
@@ -22,12 +22,12 @@ public class PostCreationViewModel extends ViewModel {
     private MutableLiveData<Boolean> isTagNotFound;
     private PostDAO postDAO;
     private ReviewDAO reviewDAO;
-    private TagCountDAO tagCountDAO;
+    private TagDAO tagDAO;
 
     public PostCreationViewModel() {
         super();
         postDAO=new PostDAO();
-        tagCountDAO=new TagCountDAO();
+        tagDAO =new TagDAO();
         reviewDAO=new ReviewDAO();
         message=new MutableLiveData<>();
         isTagNotFound =new MutableLiveData<>();
@@ -41,9 +41,10 @@ public class PostCreationViewModel extends ViewModel {
         return isTagNotFound;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void validateAutoCompleteTextView(String tag){
         //Tag must be in database, user cant create new
-        if(TagCountDAO.getTagsCount().containsKey(tag)){
+        if(TagDAO.getTags().values().stream().anyMatch((t) -> t.getName().equals(tag))){
             isTagNotFound.setValue(false);
         }else isTagNotFound.setValue(true);
     }
@@ -52,7 +53,7 @@ public class PostCreationViewModel extends ViewModel {
         //Check post id is not provided
         if(post.getId()==null){
             //Count the number of posts with this tag
-            tagCountDAO.updatePostCount(post.getTag(), true);
+            tagDAO.updatePostCount(post.getTagID(), true);
             //Insert new post
             postDAO.insertPost(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -82,7 +83,7 @@ public class PostCreationViewModel extends ViewModel {
 
     public void delete(Post post, Consumer<Void> consumer){
         //Count the number of posts with this tag
-        tagCountDAO.updatePostCount(post.getTag(), false);
+        tagDAO.updatePostCount(post.getTagID(), false);
         //Delete post document
         postDAO.delete(post).addOnSuccessListener(new OnSuccessListener<Void>() {
             @RequiresApi(api = Build.VERSION_CODES.N)

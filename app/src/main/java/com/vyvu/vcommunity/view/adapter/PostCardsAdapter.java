@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vyvu.vcommunity.R;
 import com.vyvu.vcommunity.databinding.PostRecyclerviewBinding;
 import com.vyvu.vcommunity.firebase.PostDAO;
+import com.vyvu.vcommunity.firebase.TagDAO;
 import com.vyvu.vcommunity.model.Post;
 import com.vyvu.vcommunity.view.post.PostReviews;
 
@@ -56,6 +57,7 @@ public class PostCardsAdapter extends RecyclerView.Adapter<PostCardsAdapter.Post
         Post p=posts.get(position);
         PostRecyclerviewBinding binding=holder.getBinding();
         binding.setPost(p);
+        binding.setTag(TagDAO.getTags().get(p.getTagID()));
         binding.btnExpand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

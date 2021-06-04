@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.vyvu.vcommunity.R;
 import com.vyvu.vcommunity.databinding.ActivitySearchBinding;
 import com.vyvu.vcommunity.model.Post;
+import com.vyvu.vcommunity.model.Tag;
 import com.vyvu.vcommunity.view.adapter.PostCardsAdapter;
 import com.vyvu.vcommunity.viewmodel.home.SearchViewModel;
 
@@ -34,18 +35,18 @@ public class Search extends AppCompatActivity {
 
         searchBinding.container.setAdapter(postCardsAdapter=new PostCardsAdapter(this));
         searchBinding.container.setLayoutManager(new LinearLayoutManager(this));
-        String data=getIntent().getStringExtra("search-key");
+        Object data=getIntent().getStringExtra("search-key");
         if(data==null) {
-            data=getIntent().getStringExtra("search-tag");
+            data=getIntent().getSerializableExtra("search-tag");
             if(data==null) finish();
-            mViewModel.initPostByTag(data, new Consumer<ArrayList<Post>>() {
+            mViewModel.initPostByTag(((Tag)data).getId(), new Consumer<ArrayList<Post>>() {
                 @Override
                 public void accept(ArrayList<Post> posts) {
                     postCardsAdapter.setPosts(posts);
                 }
             });
         }else{
-            mViewModel.initPostByWords(data, new Consumer<ArrayList<Post>>() {
+            mViewModel.initPostByWords((String) data, new Consumer<ArrayList<Post>>() {
                 @Override
                 public void accept(ArrayList<Post> posts) {
                     postCardsAdapter.setPosts(posts);
@@ -53,6 +54,6 @@ public class Search extends AppCompatActivity {
             });
         }
         getSupportActionBar().setTitle("Search for: ");
-        getSupportActionBar().setSubtitle(data);
+        getSupportActionBar().setSubtitle(data.toString());
     }
 }

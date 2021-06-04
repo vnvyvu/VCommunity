@@ -22,8 +22,8 @@ public class SearchViewModel extends ViewModel {
         postDAO=new PostDAO();
     }
 
-    public void initPostByTag(String tag, Consumer<ArrayList<Post>> consumer){
-        postDAO.getPostByTag(tag, 10).addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+    public void initPostByTag(String tagID, Consumer<ArrayList<Post>> consumer){
+        postDAO.getPostByTag(tagID, 10).addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

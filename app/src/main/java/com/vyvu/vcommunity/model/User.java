@@ -12,7 +12,7 @@ public class User implements Serializable {
     private boolean admin;
     private long exp;
     private Date creationTimestamp;
-    private ArrayList<String> tags;
+    private ArrayList<String> tagIDs;
 
     public User() {
     }
@@ -74,12 +74,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public ArrayList<String> getTags() {
-        return tags;
+    public ArrayList<String> getTagIDs() {
+        return tagIDs;
     }
 
-    public void setTags(ArrayList<String> tags) {
-        this.tags = tags;
+    public void setTagIDs(ArrayList<String> tagIDs) {
+        this.tagIDs = tagIDs;
     }
 
     public String getDisplayName() {

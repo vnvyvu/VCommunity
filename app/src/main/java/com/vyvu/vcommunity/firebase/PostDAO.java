@@ -78,8 +78,8 @@ public class PostDAO extends DAO {
     public Task<QuerySnapshot> getPostByUserId(String uid, long limit){
         return collection.whereEqualTo("userID", uid).limit(limit).get();
     }
-    public Task<QuerySnapshot> getPostByTag(String tag, long limit){
-        return collection.whereEqualTo("tag", tag).limit(limit).get();
+    public Task<QuerySnapshot> getPostByTag(String tagID, long limit){
+        return collection.whereEqualTo("tagID", tagID).limit(limit).get();
     }
     public Task<QuerySnapshot> getPostByWords(String words, long limit){
         return collection.orderBy("detail").startAt(words).endAt(words+"~").limit(limit).get();

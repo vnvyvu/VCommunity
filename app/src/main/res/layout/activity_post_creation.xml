@@ -9,6 +9,9 @@
             name="mViewModel"
             type="com.vyvu.vcommunity.viewmodel.home.PostCreationViewModel" />
         <variable
+            name="tag"
+            type="com.vyvu.vcommunity.model.Tag" />
+        <variable
             name="post"
             type="com.vyvu.vcommunity.model.Post" />
     </data>
@@ -187,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:completionThreshold="1"
                     android:inputType="text"
-                    android:text="@{post.tag}"
+                    android:text="@{tag.name}"
                     android:textSize="18sp"
                     />
             </com.google.android.material.textfield.TextInputLayout>

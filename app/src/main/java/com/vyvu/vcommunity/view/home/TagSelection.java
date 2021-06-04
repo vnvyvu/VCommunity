@@ -16,8 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.chip.Chip;
 import com.vyvu.vcommunity.R;
 import com.vyvu.vcommunity.databinding.ActivityTagSelectionBinding;
-import com.vyvu.vcommunity.firebase.TagCountDAO;
+import com.vyvu.vcommunity.firebase.TagDAO;
 import com.vyvu.vcommunity.firebase.UserDAO;
+import com.vyvu.vcommunity.model.Tag;
 import com.vyvu.vcommunity.utils.ComponentUtils;
 import com.vyvu.vcommunity.viewmodel.home.TagSelectionViewModel;
 
@@ -29,8 +30,7 @@ import java.util.concurrent.Callable;
 public class TagSelection extends AppCompatActivity {
     private ActivityTagSelectionBinding activityTagSelectionBinding;
     private TagSelectionViewModel mViewModel;
-    //entry: (tag(postCount), tag)
-    private HashMap<Chip, String> chipStringHashMap;
+    private HashMap<Chip, Tag> chipStringHashMap;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,20 +71,20 @@ public class TagSelection extends AppCompatActivity {
         });
 
         chipStringHashMap=new HashMap<>();
-        ArrayList<String> checkedTag=UserDAO.getUser().getTags();
+        ArrayList<String> checkedTag=UserDAO.getUser().getTagIDs();
         if(checkedTag==null){
-            for (Map.Entry<String, Long> entry:TagCountDAO.getTagsCount().entrySet()) {
+            for (Tag tag: TagDAO.getTags().values()) {
                 Chip chip=createChip();
-                chip.setText(entry.getKey()+"("+entry.getValue()+")");
-                chipStringHashMap.put(chip, entry.getKey());
+                chip.setText(tag.getName()+"("+tag.getPostCount()+")");
+                chipStringHashMap.put(chip, tag);
                 activityTagSelectionBinding.tagsGroup.addView(chip);
             }
         }else{
-            for (Map.Entry<String, Long> entry:TagCountDAO.getTagsCount().entrySet()) {
+            for (Tag tag: TagDAO.getTags().values()) {
                 Chip chip=createChip();
-                chip.setText(entry.getKey()+"("+entry.getValue()+")");
-                chip.setChecked(checkedTag.contains(entry.getKey()));
-                chipStringHashMap.put(chip, entry.getKey());
+                chip.setText(tag.getName()+"("+tag.getPostCount()+")");
+                chip.setChecked(checkedTag.contains(tag.getId()));
+                chipStringHashMap.put(chip, tag);
                 activityTagSelectionBinding.tagsGroup.addView(chip);
             }
         }
@@ -97,8 +97,8 @@ public class TagSelection extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                for (Map.Entry<Chip, String> chipStringEntry:chipStringHashMap.entrySet()) {
-                    if(chipStringEntry.getValue().contains(newText)||newText.contains(chipStringEntry.getValue())){
+                for (Map.Entry<Chip, Tag> chipStringEntry:chipStringHashMap.entrySet()) {
+                    if(chipStringEntry.getValue().getName().contains(newText)||newText.contains(chipStringEntry.getValue().getName())){
                         chipStringEntry.getKey().setVisibility(View.VISIBLE);
                     }else chipStringEntry.getKey().setVisibility(View.GONE);
                 }
@@ -112,7 +112,6 @@ public class TagSelection extends AppCompatActivity {
         chip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String txt = chip.getText().toString();
                 if (chip.isChecked()) {
                     if(mViewModel.getMaxOfTags().getValue()==0) chip.setChecked(false);
                     else {
